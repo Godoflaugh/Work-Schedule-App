@@ -7,7 +7,7 @@ const week = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", 
 
 
 var d = new Date()
-let dayNumber = d.getDate() 
+let dayNumber = d.getDate()
 
 var m = new Date()
 let month = months[m.getMonth()]
@@ -25,57 +25,67 @@ var minute = currentTime.getMinutes()
 var second = currentTime.getSeconds()
 
 
-// var time = new Date()
-// time.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true })
 
 
 
+document.getElementById("currentDay").innerHTML = "" + day + " " + dayNumber + "th of " + month + ", " + year
 
-document.getElementById("currentDay").innerHTML = "" + day + " " + dayNumber + "th of "  + month + ", " + year 
-// document.getElementById("timeDisplay").innerHTML = hour + ":" + minute 
-// document.getElementById("timeDisplay").innerHTML = time
 
 // Checks the time vs whats on the table, if it is past the time red it out, if is in the future (grey), current is green
 
 
-if(hour <= 17 && hour >= 9){
-  document.getElementById("nineSlot").style.background = "grey"
-}
+$("input.eventBlock").each(function () {
+  var currentBlock = $("input").attr("id")
+  console.log(currentBlock)
 
 
+  if (currentBlock === moment().format("HH")) {
+    currentBlock.addClass("present")
 
 
-
-
-
-
-
-
-
-// Function 
-
-function clock() {
-  let date = new Date();
-  let hh = date.getHours();
-  let mm = date.getMinutes();
-  let ss = date.getSeconds();
-  let session = "AM";
-
-  if (hh == 0) {
-    hh = 12;
+  } else if (currentBlock >= moment().format("HH")) {
+    currentBlock.addClass("future")
   }
-  if (hh > 12) {
-    hh = hh - 12;
-    session = "PM";
+  else {
+    currentBlock.addClass("past")
   }
 
-  hh = (hh < 10) ? "0" + hh : hh;
-  mm = (mm < 10) ? "0" + mm : mm;
-  ss = (ss < 10) ? "0" + ss : ss;
+})
 
-  let time = hh + ":" + mm + ":" + ss + " " + session;
 
-  document.getElementById("timeDisplay").innerText = time;
-  let t = setTimeout(function () { clock() }, 1000);
-}
-clock();
+
+
+
+
+
+
+
+
+
+// Function from stackover flow question answered
+
+// function clock() {
+//   let date = new Date();
+//   let hh = date.getHours();
+//   let mm = date.getMinutes();
+//   let ss = date.getSeconds();
+//   let session = "AM";
+
+//   if (hh == 0) {
+//     hh = 12;
+//   }
+//   if (hh > 12) {
+//     hh = hh - 12;
+//     session = "PM";
+//   }
+
+//   hh = (hh < 10) ? "0" + hh : hh;
+//   mm = (mm < 10) ? "0" + mm : mm;
+//   ss = (ss < 10) ? "0" + ss : ss;
+
+//   let time = hh + ":" + mm + ":" + ss + " " + session;
+
+//   document.getElementById("timeDisplay").innerText = time;
+//   let t = setTimeout(function () { clock() }, 1000);
+// }
+// clock();

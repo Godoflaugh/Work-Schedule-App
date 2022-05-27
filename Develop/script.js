@@ -1,5 +1,6 @@
 // Variable declaration
 var timeDisplayEl = $('#timeDisplay')
+var saveButtonEl = $('#saveBtn')
 
 const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
 const week = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
@@ -24,6 +25,23 @@ var hour = currentTime.getHours()
 var minute = currentTime.getMinutes()
 var second = currentTime.getSeconds()
 
+var testTime = moment().format("HH")
+
+
+
+// Storing Data
+
+const keyInput = document.getElementById("${9}Save")
+const btnClick = document.getElementById("sve")
+
+btnClick.onclick = function () {
+  const data = keyInput.value
+  console.log(data)
+}
+
+
+
+
 
 
 
@@ -34,30 +52,49 @@ document.getElementById("currentDay").innerHTML = "" + day + " " + dayNumber + "
 // Checks the time vs whats on the table, if it is past the time red it out, if is in the future (grey), current is green
 
 
-$("input.eventBlock").each(function () {
+$("input").each(function () {
   var currentBlock = $("input").attr("id")
-  console.log(currentBlock)
 
 
-  if (currentBlock === moment().format("HH")) {
-    currentBlock.addClass("present")
+  // Present loop - Check if we in the current hour
+  if (currentBlock == moment().format("HH")) {
 
+    $("input").addClass("present")
 
-  } else if (currentBlock >= moment().format("HH")) {
-    currentBlock.addClass("future")
+    // Future Loop, if current block is less than the time currently
+  } else if (currentBlock < moment().format("HH")) {
+    // currentBlock.addClass("future")
+    $("input").addClass("future")
   }
   else {
-    currentBlock.addClass("past")
+    // past 
+    $("input").addClass("past")
   }
 
 })
 
 
+// Saving Functionality 
 
 
+// $('saveBtn').addEventListener('click', saveMe()){
 
+// }
 
+// On user click, the system will save the text entered in the event column and save it to local storage
+function saveMe() {
+  var textStorage = $(input).value;
 
+  localStorage
+  console.log("localStorage")
+
+  localStorage.setItem('name', input)
+
+}
+
+function renderEvent() {
+
+}
 
 
 
